@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}RAVOD — Xarid qilishning yangi darajasi{% endblock %}
+{% block content %}
+<section class="hero">
+    <div class="container hero-inner">
+        <div class="hero-copy">
+            <span class="eyebrow"><span class="eyebrow-dot"></span> RAVOD DO'KONI</span>
+            <h1>Xarid qilishning <em>yangi darajasi.</em></h1>
+            <p>Zamonaviy mahsulotlar, qulay tanlov va oson buyurtma — barchasi bir joyda. RAVOD bilan xarid qilish yanada maroqli.</p>
+            <div class="hero-buttons">
+                <a class="btn btn-primary" href="/katalog/">Katalogni ko'rish <span aria-hidden="true">→</span></a>
+                <a class="btn btn-outline" href="/biz-haqimizda/">Biz haqimizda</a>
+            </div>
+            <div class="hero-highlights">
+                <span>✦ Sifatli tanlov</span>
+                <span>✦ Mobilga mos</span>
+                <span>✦ Qulay savatcha</span>
+            </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+            <div class="hero-orbit hero-orbit-one"></div>
+            <div class="hero-orbit hero-orbit-two"></div>
+            <div class="hero-premium-card">
+                <span class="hero-card-overline">RAVOD / 01</span>
+                <div class="hero-card-letter">R</div>
+                <span class="hero-card-title">RAVOD COLLECTION</span>
+                <span class="hero-card-subtitle">Yangi imkoniyatlar olami</span>
+            </div>
+            <span class="floating-tag floating-tag-top">✦ RAVOD</span>
+            <span class="floating-tag floating-tag-bottom">◆ V 1.0</span>
+        </div>
+    </div>
+</section>
+
+<!-- YANGI MAHSULOTLAR QISMI (Yagona tovarlar ro'yxati) -->
+<section class="products-section" aria-labelledby="new-title">
+    <div class="container">
+        <div class="section-heading">
+            <div>
+                <p class="section-kicker">Yangi kolleksiya</p>
+                <h2 id="new-title">Yaqinda qo'shilgan <span>mahsulotlar</span></h2>
+                <p class="section-description">Katalogimizga yangi qo'shilgan mahsulotlar.</p>
+            </div>
+            <a class="section-more" href="/katalog/">Katalogga o'tish →</a>
+        </div>
+        <div class="product-grid">
+            {% for product in new_arrivals %}
+            <article class="product-card">
+                <a class="product-image-link" href="{{ product.get_absolute_url }}" aria-label="{{ product.name }} haqida batafsil">
+                    <div class="product-image-wrap">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" width="600" height="600" loading="lazy" decoding="async">
+                        {% else %}
+                        <span class="no-photo" aria-label="Mahsulot rasmi mavjud emas">R</span>
+                        {% endif %}
+                        <span class="product-tag product-tag-new">YANGI</span>
+                    </div>
+                </a>
+                <div class="product-body">
+                    <span class="product-category">RAVOD mahsuloti</span>
+                    <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+                    <p class="product-price">{{ product.price|floatformat:0 }} <small>so'm</small></p>
+                    <!-- Savatcha ulanishi hozircha form orqali turibdi -->
+                    <form method="post" action="/savatcha/qoshish/{{ product.pk }}/">
+                        {% csrf_token %}
+                        <button class="btn btn-primary btn-full" type="submit">🛒 Savatga qo'shish</button>
+                    </form>
+                </div>
+            </article>
+            {% empty %}
+            <div class="empty-products">Yangi mahsulotlar hali kiritilmagan.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-panel">
+            <div>
+                <p class="section-kicker">RAVOD siz uchun</p>
+                <h2>O'zingizga mos mahsulotni toping.</h2>
+                <p>Mahsulotlar katalogini ko'rib, yoqqanlarini savatchangizga qo'shing.</p>
+            </div>
+            <a class="btn btn-primary" href="/katalog/">Xaridni boshlash →</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

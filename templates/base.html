@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#071525">
+    <title>{% block title %}RAVOD — Onlayn do'kon{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<!-- Body dagi ortiqcha margin va paddinglar olib tashlandi -->
+<body style="margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; background: #071525; color: #f9f8f4;">
+
+    <!-- HEADER -->
+    <header class="site-header" style="position: sticky; top: 0; z-index: 100; background: rgba(3,10,18,.93); border-bottom: 1px solid rgba(255,255,255,.1); backdrop-filter: blur(16px);">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px;">
+            <a href="/" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: white;">
+                <div style="width: 40px; height: 40px; background: #102239; border: 1px solid rgba(215,173,98,.38); border-radius: 10px; display: grid; place-items: center; color: #d7ad62; font-weight: bold; font-size: 20px;">R</div>
+                <div>
+                    <strong style="display: block; font-size: 18px; color: #f0d79a; letter-spacing: 2px;">RAVOD</strong>
+                    <small style="font-size: 10px; color: #a9b5c3;">Market v1.0</small>
+                </div>
+            </a>
+            <nav style="display: flex; gap: 15px;">
+                <a href="/" style="color: white; text-decoration: none; font-size: 14px;">Bosh sahifa</a>
+                <a href="/katalog/" style="color: white; text-decoration: none; font-size: 14px;">Katalog</a>
+                <a href="/savatcha/" style="color: white; text-decoration: none; font-size: 14px;">Savatcha</a>
+                <a href="/profil/" style="color: #d7ad62; text-decoration: none; font-size: 14px;">Profil</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ASOSIY QISM -->
+    <main style="flex: 1;">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="background: #030a12; border-top: 1px solid rgba(255,255,255,.1); padding: 40px 20px; text-align: center; margin-top: auto;">
+        <div class="container">
+            <h2 style="color: #f0d79a; margin-bottom: 10px; letter-spacing: 2px;">RAVOD</h2>
+            <p style="color: #a9b5c3; font-size: 14px; margin-bottom: 20px;">Premium onlayn xaridlar olami.</p>
+            <div style="color: #8192a2; font-size: 12px; border-top: 1px solid rgba(255,255,255,.05); padding-top: 20px;">
+                © {% now 'Y' %} RAVOD. Barcha huquqlar himoyalangan.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

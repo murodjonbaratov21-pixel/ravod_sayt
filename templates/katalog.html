@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Katalog | RAVOD{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/catalog.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="rv-catalog">
+
+    <section class="rv-hero" aria-labelledby="rv-hero-title">
+        <span class="rv-hero-decoration" aria-hidden="true">R</span>
+        <div class="rv-container">
+            <div class="rv-hero-inner">
+                <nav class="rv-breadcrumb" aria-label="Sahifa manzili">
+                    <a href="/">Asosiy sahifa</a>
+                    <span aria-hidden="true">/</span>
+                    <span class="rv-current" aria-current="page">Katalog</span>
+                </nav>
+                <div class="rv-eyebrow">
+                    <span class="rv-eyebrow-dot"></span>
+                    RAVOD DO'KONI
+                </div>
+                <h1 id="rv-hero-title">
+                    Mahsulotlar
+                    <span>katalogi.</span>
+                </h1>
+                <p class="rv-hero-description">
+                    RAVOD olamiga xush kelibsiz! Eng yaxshi mahsulotlarni bir joyda kashf eting. O'zingizga yoqqan mahsulotni tanlang va xarid qilishning yangi darajasini his eting.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="rv-shop-section" aria-labelledby="rv-products-heading">
+        <div class="rv-container">
+
+            <div class="rv-section-top">
+                <div>
+                    <h2 class="rv-section-title" id="rv-products-heading">
+                        Barcha <span>mahsulotlar</span>
+                    </h2>
+                </div>
+                <div class="rv-product-count">
+                    <span>Mahsulotlar soni:</span>
+                    <strong>{{ products|length }}</strong>
+                </div>
+            </div>
+
+            <div class="rv-gold-line"></div>
+
+            {% if products %}
+            <div class="rv-product-grid">
+
+                {% for product in products %}
+                <article class="rv-product-card">
+
+                    <div class="rv-product-image">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy" decoding="async">
+                        {% else %}
+                            <div class="rv-no-image">
+                                <div class="rv-no-image-symbol">R</div>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="rv-product-info">
+
+                        <div class="rv-product-category">
+                            RAVOD MAHSULOTI
+                        </div>
+
+                        <h3 class="rv-product-name">
+                            <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                        </h3>
+
+                        <!-- MAHSULOT TAVSIFI QO'SHILDI -->
+                        {% if product.description %}
+                        <p style="color: var(--rv-muted); font-size: 13px; line-height: 1.5; margin: -10px 0 15px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+                            {{ product.description }}
+                        </p>
+                        {% endif %}
+
+                        <div class="rv-product-price-wrap">
+                            <span class="rv-price-label">Narxi</span>
+                            <p class="rv-product-price">
+                                {{ product.price|floatformat:0 }} <small>so'm</small>
+                            </p>
+                        </div>
+
+                        <div class="rv-product-actions" style="margin-top: 20px;">
+                            <a href="{{ product.get_absolute_url }}" style="display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 46px; padding: 12px 16px; border-radius: 11px; background: linear-gradient(135deg,#f5dfa9 0%,#d7ad62 52%,#b78236 100%); color: #071525; font-size: 14px; font-weight: 900; text-align: center; text-decoration: none;">
+                                Batafsil ko'rish <span style="font-size: 18px;">→</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </article>
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+            <!-- BO'SH HOLAT (XATOLIKLAR TOZALANDI) -->
+            <div class="rv-empty-state" role="status">
+                <div class="rv-empty-kicker">RAVOD DO'KONI</div>
+                <h3>Hozircha mahsulotlar yo'q</h3>
+                <p>Katalogimiz hozircha bo'sh. Tez orada bu yerda siz uchun ajoyib mahsulotlar paydo bo'ladi!</p>
+            </div>
+            {% endif %}
+
+        </div>
+    </section>
+
+</div>
+{% endblock %}

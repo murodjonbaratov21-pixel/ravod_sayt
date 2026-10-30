@@ -1,0 +1,37 @@
+<header class="site-header">
+    <div class="container header-inner">
+        <!-- Logo -->
+        <a href="{% url 'bosh_sahifa' %}" class="brand">
+            <div class="brand-mark">
+                <!-- Agar logotip rasming bo'lsa -->
+                <img src="{% static 'images/ravod.png' %}" alt="RAVOD Logo">
+            </div>
+            <div class="brand-info">
+                <strong>RAVOD</strong>
+                <small>Onlayn Do'kon</small>
+            </div>
+        </a>
+
+        <!-- Mobil menyu uchun yashirin checkbox -->
+        <input type="checkbox" id="navToggle" class="nav-checkbox">
+
+        <!-- Burger tugma (label vazifasini bajaradi) -->
+        <label for="navToggle" class="nav-toggle" aria-label="Menyuni ochish">
+            <span>Menyu</span>
+            <div class="hamburger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </div>
+        </label>
+
+        <!-- Asosiy navigatsiya -->
+        <nav class="site-nav" id="mainNav">
+            <a href="{% url 'bosh_sahifa' %}">Bosh sahifa</a>
+            <a href="{% url 'katalog' %}">Katalog</a>
+            <a href="{% url 'biz_haqimizda' %}">Biz haqimizda</a>
+            <a href="{% url 'savatcha' %}">Savatcha</a>
+            <a href="{% url 'profil' %}" class="nav-profile">Profil</a>
+        </nav>
+    </div>
+</header>

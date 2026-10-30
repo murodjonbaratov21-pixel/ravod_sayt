@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.name }} | RAVOD{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 60px 20px; display: flex; flex-wrap: wrap; gap: 40px; min-height: 60vh; align-items: flex-start;">
+
+    <!-- RASM QISMI -->
+    <div style="flex: 1; min-width: 320px; border: 1px solid rgba(215,173,98,.2); border-radius: 20px; overflow: hidden; background: #0b1d32; padding: 20px; display: flex; justify-content: center; align-items: center;">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; max-height: 500px; object-fit: contain; border-radius: 10px;">
+        {% else %}
+            <div style="width: 100%; height: 400px; display: grid; place-items: center; font-size: 100px; color: var(--gold); font-weight: bold;">R</div>
+        {% endif %}
+    </div>
+
+    <!-- MA'LUMOTLAR QISMI -->
+    <div style="flex: 1; min-width: 320px; display: flex; flex-direction: column;">
+        <span style="color: #d7ad62; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px; font-weight: bold;">RAVOD MAHSULOTI</span>
+        <h1 style="font-size: clamp(32px, 5vw, 48px); margin: 0 0 20px; color: white;">{{ product.name }}</h1>
+
+        <p style="font-size: 36px; font-weight: 900; margin: 0 0 30px; color: #f0d79a;">
+            {{ product.price|floatformat:0 }} <small style="color: #a9b5c3; font-size: 18px; font-weight: normal;">so'm</small>
+        </p>
+
+        <!-- TAVSIF SHU YERDA CHIQADI -->
+        <div style="background: rgba(255,255,255,.03); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,.05); margin-bottom: 40px;">
+            <h3 style="font-size: 16px; margin: 0 0 10px; color: white;">Mahsulot haqida:</h3>
+            <p style="color: #a9b5c3; line-height: 1.8; margin: 0; font-size: 15px;">
+                {% if product.description %}
+                    {{ product.description }}
+                {% else %}
+                    Ushbu premium mahsulot RAVOD sifat nazoratidan o'tgan.
+                {% endif %}
+            </p>
+        </div>
+
+        <form method="post" action="/savatcha/qoshish/{{ product.pk }}/">
+            {% csrf_token %}
+            <button type="submit" style="width: 100%; background: linear-gradient(135deg,#f5dfa9 0%,#d7ad62 52%,#b78236 100%); color: #071525; padding: 18px; border: none; border-radius: 12px; font-weight: 900; font-size: 18px; cursor: pointer;">
+                🛒 Savatchaga qo'shish
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
